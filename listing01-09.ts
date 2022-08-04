@@ -21,6 +21,7 @@ const student: Student = {
 
 const person: Person = student // das klappt!
 
+
 ///////////////////////////////////////////////////
 // Listing 2: Definition eines Intersection Type //
 ///////////////////////////////////////////////////
@@ -36,6 +37,7 @@ type Person = {
 
 type Student = Person & Studies
 
+
 ////////////////////////////////////////////
 // Listing 3: Definieren eines Union Type //
 ////////////////////////////////////////////
@@ -46,6 +48,7 @@ type Professor = Person & {
 }
 
 type UniversityPeople = Student | Professor
+
 
 ////////////////////////////////////////////
 // Listing 4: Verwenden von Literal Types //
@@ -72,7 +75,8 @@ type ToyBase = {
     kind: "doll";
     material: "plastic" | "plush";
   }
-  
+
+
 //////////////////////////////////////
 // Listing 5: Exhaustiveness Checks //
 //////////////////////////////////////
@@ -97,8 +101,9 @@ function printToys(toy: Toy) {
     throw Error("I can't work with this type")
   }
 
+
 ////////////////////////////////////////////////////////////
-// Listing 6: Hinzufügen einer neuen Variante zum Toy-Typ //
+// Listing 6: Hinzufuegen einer neuen Variante zum Toy-Typ //
 ////////////////////////////////////////////////////////////
 
 type VideoGame
@@ -109,8 +114,9 @@ type VideoGame = ToyBase & {
 
 type Toy = BoardGame | Puzzle | Doll | VideoGame
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Listing 7: Unverzügliche Reaktion von Exhaustiveness Checks nach Änderung des ursprünglichen Union Type //
+// Listing 7: Unverzuegliche Reaktion von Exhaustiveness Checks nach Aenderung des urspruenglichen Union Type //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function printToys(toy: Toy) {
@@ -127,19 +133,21 @@ function printToys(toy: Toy) {
     default: 
       // Einen Augenblick! toy ist nun VideoGame
       // und nicht never. Dieser Funktionsaufruf
-      // ist ungültig
+      // ist ungueltig
       assertNever(toy)
   }
 }
 
+
 //////////////////////////////////////////////////////////////////////////////
-// Listing 8: Wie TypeScript eine "Conditional of Unions" expandieren würde //
+// Listing 8: Wie TypeScript eine "Conditional of Unions" expandieren wuerde //
 //////////////////////////////////////////////////////////////////////////////
 
 type Dolls = BoardGame extends { kind: "doll"} ? BoardGame : never |
 	Doll extends { kind: "doll"} ? Doll : never |
 	Puzzle extends { kind: "doll"} ? Puzzle : never |
 	VideoGame extends { kind: "doll"} ? VideoGame : never
+
 
 //////////////////////////////////////////////////////
 // Listing 9: Wie TypeScript GroupedToys expandiert //
